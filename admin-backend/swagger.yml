@@ -1,0 +1,39 @@
+openapi: 3.0.0
+info:
+  title: PASSTRAVEL Admin API
+  description: API documentation for PASSTRAVEL Admin Dashboard
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:5000
+    description: Development server
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+paths:
+  /admin/ping:
+    get:
+      summary: Test endpoint
+      description: Simple test endpoint to verify admin authentication
+      security:
+        - BearerAuth: []
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+        401:
+          description: Unauthorized
+        403:
+          description: Forbidden - Not an admin
